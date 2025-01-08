@@ -52,14 +52,18 @@ B_nopadding :: struct
 run_test :: ($struct_type : Type) {
     print("-----------------------\n");
     print("size_of(%) == %\n", struct_type, size_of(struct_type));
+
     MemberInfo :: struct {
         name : string;
         align : int = 0;
     }
     bytes : []MemberInfo;
     bytes.count = size_of(struct_type);
-    bytes.data = alloc(size_of(MemberInfo)*bytes.count);
+    allocation_size := size_of(MemberInfo)*bytes.count;
+    bytes.data = alloc(allocation_size);
     assert(bytes.data != null);
+    memset(dest = bytes.data, value = 0, count = allocation_size);
+
     for member : type_info(struct_type).members {
         start : int = member.offset_in_bytes;
         end : int = member.offset_in_bytes + member.type.runtime_size;
