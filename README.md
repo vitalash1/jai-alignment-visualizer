@@ -1,7 +1,7 @@
 # jai-alignment-visualizer
 Jai alignment visualizer
 
-Run a.jai to get some compile time prints.
+Use `jai a.jai` to get some compile time prints.
 
 For more information, if you add an `#align 16;` directive, you should also add an `@align=16` note right after, like this  
 `linear_quadratic_radius: Vector3 = .{0.7,1.8,25} #align 16; @align=16`  
